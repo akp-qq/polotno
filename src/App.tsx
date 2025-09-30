@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { PolotnoContainer, SidePanelWrap, WorkspaceWrap } from 'polotno';
+import { Toolbar } from 'polotno/toolbar/toolbar';
+import { PagesTimeline } from 'polotno/pages-timeline';
+import { ZoomButtons } from 'polotno/toolbar/zoom-buttons';
+import { SidePanel } from 'polotno/side-panel';
+import { Workspace } from 'polotno/canvas/workspace';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import { createStore } from 'polotno/model/store';
 
-function App() {
+const store = createStore({
+  key: 'TBvfe1pYY36PJz4l5E2B',
+  showCredit: true,
+});
+
+// Add a default page
+store.addPage();
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PolotnoContainer style={{ width: '100vw', height: '100vh' }}>
+      <SidePanelWrap>
+        <SidePanel store={store} />
+      </SidePanelWrap>
+      <WorkspaceWrap>
+        <Toolbar store={store} downloadButtonEnabled />
+        <Workspace store={store} />
+        <ZoomButtons store={store} />
+        <PagesTimeline store={store} />
+      </WorkspaceWrap>
+    </PolotnoContainer>
   );
-}
+};
 
 export default App;
