@@ -8,12 +8,18 @@ import { Workspace } from 'polotno/canvas/workspace';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import { createStore } from 'polotno/model/store';
 
+import { setDefaultQuery } from 'polotno/side-panel/background-panel';
+
+// Set default background search query
+setDefaultQuery('city');
+
+// Create the Polotno store
 const store = createStore({
   key: 'TBvfe1pYY36PJz4l5E2B',
   showCredit: true,
 });
 
-// Add a default page
+// Add initial page
 store.addPage();
 
 const App: React.FC = () => {
